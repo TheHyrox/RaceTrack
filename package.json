@@ -1,0 +1,18 @@
+{
+  "name": "RaceTrack",
+  "version": "0.1.0",
+  "description": "A racing track visualization application built with Vite and AnimeJS.",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "animejs": "^4.0.2",
+    "vite": "^6.3.5"
+  },
+  "keywords": [],
+  "author": "TheHyrox",
+  "license": "ISC"
+}

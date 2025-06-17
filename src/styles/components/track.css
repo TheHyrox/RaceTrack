@@ -1,0 +1,85 @@
+body {
+  background-color: #1a1a1a;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(0, 255, 213, 0.2) 1px, transparent 0);
+  background-size: 25px 25px;
+}
+
+.svg-container {
+  width: 50%;
+  height: 50%;
+  background: transparent;
+  position: relative;
+  margin: 10% auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svg-scene {
+  width: 100%;
+  height: 100%;
+  perspective: 1500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.svg-rotator {
+  width: 60%;
+  height: 60%;
+  transform-style: preserve-3d;
+  animation: rotateZ-3D 16s linear infinite;
+  will-change: transform;
+}
+
+#track-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: scale(1.5);
+  transform-origin: center;
+  overflow: visible;
+}
+
+@keyframes rotateZ-3D {
+  from {
+    transform: rotateX(65deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(65deg) rotateZ(360deg);
+  }
+}
+
+.car {
+  width: 100px;
+  height: 100px;
+  clip-path: polygon(0% 20%, 60% 50%, 0% 80%);
+  filter: drop-shadow(0 0 8px var(--glow-color));
+  position: absolute;
+  transform-box: fill-box;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+
+[class^="track-"] {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.track-base {
+  stroke: #333;
+  stroke-width: 8;
+  opacity: 0.8;
+}
+
+.track-accent {
+  stroke-width: 4;
+}
+
+.f1-track { stroke: #e10600; }
+.motogp-track { stroke: #ff9900; }
+.wec-track { stroke: #00ffc8; }

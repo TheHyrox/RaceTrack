@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racing Track Visualizer</title>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Racing Track Visualizer</h1>
+            <p>Watch cars navigate famous racing circuits from F1, MotoGP & WEC</p>
+        </header>
+
+        <nav class="controls">
+            <div class="category-selector">
+                <button class="category-btn active" data-category="f1">Formula 1</button>
+                <button class="category-btn" data-category="motogp">MotoGP</button>
+                <button class="category-btn" data-category="wec">WEC</button>
+            </div>
+            
+            <div class="track-selector">
+                <select id="track-select">
+                    <option value="">Select a track...</option>
+                </select>
+            </div>
+
+            <div class="animation-controls">
+                <button id="play-pause">Pause</button>
+                <button id="reset">Reset</button>
+                <input type="range" id="speed-slider" min="0.5" max="3" step="0.1" value="1">
+                <label for="speed-slider">Speed: <span id="speed-value">1x</span></label>
+            </div>
+        </nav>
+
+        <main class="track-container">
+            <div class="track-info">
+                <h2 id="track-name">Select a track to begin</h2>
+                <div class="track-details">
+                    <span id="track-length"></span>
+                    <span id="track-location"></span>
+                </div>
+            </div>
+            
+            <div class="svg-container">
+                <div class="svg-scene">
+                    <div class="svg-rotator">
+                        <svg id="track-svg" viewBox="0 0 800 600">
+                            <g id="track-group">
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
