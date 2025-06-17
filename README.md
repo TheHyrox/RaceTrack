@@ -17,6 +17,9 @@ Built with [Vite](https://vitejs.dev/), [AnimeJS](https://animejs.com/), and a N
 2. **Pick a track** from the dropdown.
 3. **Watch the animation!**  
    Use the controls to pause, reset, or change speed.
+<p align="center">
+   <img src="https://raw.githubusercontent.com/TheHyrox/RaceTrack/main/.github/images/demo.gif">
+</p>
 
 ## 🛠️ Tech Stack
 
