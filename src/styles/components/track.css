@@ -35,8 +35,7 @@ body {
 }
 
 #track-svg {
-  width: 100%;
-  height: auto;
+  width: auto;
   display: block;
   transform: scale(1.5);
   transform-origin: center;

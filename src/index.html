@@ -14,9 +14,29 @@
 
         <nav class="controls">
             <div class="category-selector">
-                <button class="category-btn active" data-category="f1">Formula 1</button>
-                <button class="category-btn" data-category="motogp">MotoGP</button>
-                <button class="category-btn" data-category="wec">WEC</button>
+                <div class="category-group" data-main-category="formula">
+                    <h3 class="main-category-title">Formula</h3>
+                    <div class="subcategory-buttons">
+                        <button class="category-btn active" data-category="f1">Formula 1</button>
+                        <button class="category-btn" data-category="f2">Formula 2</button>
+                        <button class="category-btn" data-category="f3">Formula 3</button>
+                        <button class="category-btn" data-category="fe">Formula E</button>
+                    </div>
+                </div>
+                
+                <div class="category-group" data-main-category="motogp">
+                    <h3 class="main-category-title">MotoGP</h3>
+                    <div class="subcategory-buttons">
+                        <button class="category-btn" data-category="motogp">MotoGP</button>
+                    </div>
+                </div>
+                
+                <div class="category-group" data-main-category="wec">
+                    <h3 class="main-category-title">WEC</h3>
+                    <div class="subcategory-buttons">
+                        <button class="category-btn" data-category="wec">WEC</button>
+                    </div>
+                </div>
             </div>
             
             <div class="track-selector">
