@@ -114,7 +114,6 @@ export class RacingTrackVisualizer {
   updateTrackInfo(track) {
     document.getElementById('track-name').textContent = track.name;
     
-    // Update additional track info if elements exist
     const locationElement = document.getElementById('track-location');
     const lengthElement = document.getElementById('track-length');
     
