@@ -1,5 +1,3 @@
-// This file contains helper functions that assist with various tasks in the application.
-
 export function formatTime(milliseconds) {
   const minutes = Math.floor(milliseconds / 60000);
   const seconds = ((milliseconds % 60000) / 1000).toFixed(1);

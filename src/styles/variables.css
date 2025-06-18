@@ -14,4 +14,12 @@
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   --border-radius: 15px;
   --transition: all 0.3s ease;
+
+  --f1-accent: '#ff1e04',
+  --f2-accent: #043961;
+  --f3-accent: #e90300;
+  --fe-accent: #14b7ed;
+  --motogp-accent: #ffffff;
+  --wec-accent: #01b9ff;
+  --default-accent: #00ffc8;
 }
