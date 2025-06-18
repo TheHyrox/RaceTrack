@@ -9,7 +9,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'src/pages/index.html'),
+        main: resolve(__dirname, 'src/pages/home.html'),
         tracks: resolve(__dirname, 'src/pages/tracks.html'),
       },
     },
@@ -29,7 +29,7 @@ export default defineConfig({
       configureServer(server) {
         server.middlewares.use('/', (req, res, next) => {
           if (req.url === '/') {
-            req.url = '/pages/index.html';
+            req.url = '/pages/home.html';
           }
           next();
         });
