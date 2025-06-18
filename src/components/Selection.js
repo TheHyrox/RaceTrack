@@ -6,6 +6,9 @@ export class Selection {
     }
 
     init() {
+        setTimeout(() => {
+            this.setupCardAnimations();
+        }, 100);
         const params = new URLSearchParams(window.location.search);
         const category = params.get('category');
         const cardsGrid = document.querySelector('.cards-grid');
@@ -38,5 +41,29 @@ export class Selection {
         } else {
             cardsGrid.innerHTML = '<p>Please select a valid category or no tracks available.</p>';
         }
+    }
+
+    setupCardAnimations() {
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(2000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px) scale(1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(2000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+            });
+        });
     }
 }
