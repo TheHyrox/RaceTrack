@@ -143,12 +143,12 @@ export class RacingTrackVisualizer {
 
   getCarColors() {
     return {
-      f1: '#e10600',
-      f2: '#0090d0',
-      f3: '#ff8c00',
-      fe: '#00e6cc',
-      motogp: '#ff9900',
-      wec: '#00ffc8',
+      f1: '#ff1e04',
+      f2: '#043961',
+      f3: '#e90300',
+      fe: '#14b7ed',
+      motogp: '#ffffff',
+      wec: '#01b9ff',
       default: '#00ffc8'
     };
   }
