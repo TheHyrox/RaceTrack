@@ -5,6 +5,10 @@ body {
   background-size: 25px 25px;
 }
 
+foreignObject {
+  overflow: visible;
+}
+
 .svg-container {
   width: 50%;
   height: 50%;
@@ -77,6 +81,31 @@ body {
 
 .track-accent {
   stroke-width: 4;
+}
+
+.track-container {
+  height: 100%;
+  margin: 2rem;
+}
+
+.track-info {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.track-info h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.track-details {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  opacity: 0.9;
+  font-size: 1.1rem;
+  color: var(--tertiary-color);
 }
 
 .f1-track { stroke: #ff1e04; }
