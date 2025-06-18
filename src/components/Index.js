@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rotateX = (y - centerY) / 10;
       const rotateY = (centerX - x) / 10;
       
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px) scale(1.02)`;
     });
     
     card.addEventListener('mouseleave', () => {
