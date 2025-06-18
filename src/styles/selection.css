@@ -1,6 +1,6 @@
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   padding: 20px;
 }
@@ -9,32 +9,37 @@
   background: var(--bg-main);
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 20px;
+  padding: 40px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   height: 60vh;
   max-width: 60vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: relative;
 }
 
-.card img {
-  width: 500%;
-  max-width: 80%;
+.track {
   height: auto;
-  object-fit: contain;
+  align-self: center;
   margin-bottom: 20px;
 }
 
 .card h3 {
   color: var(--text-color);
-  text-align: center;
+  text-align: left;
+  font-size: 2em;
   margin: 0 0 20px 0;
 }
 
 .card p {
   color: var(--text-color);
+  text-align: left;
+  margin: 0 0 20px 0;
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+
+.link {
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -43,12 +48,26 @@
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--tertiary-color);
 }
 
-.card p:hover {
-  background-color: rgba(0, 123, 255, 0.1);
-  color: #007bff;
+.card a:hover {
+  background-color: var(--bg-secondary);
+  color: var(--tertiary-color);
   transform: translateY(-2px);
+}
+
+.flag {
+  height: 50px;
+  width: 50px;
+  border-radius:50%;
+  overflow:hidden;
+  border: #ddd 3px solid;
+  align-self: flex-end;
+  position: relative;
+  margin-bottom: 20px;
+  object-fit: cover;
 }
 
 @media (max-width: 1024px) {
