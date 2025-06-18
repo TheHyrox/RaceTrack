@@ -5,6 +5,10 @@ body {
   background-size: 25px 25px;
 }
 
+foreignObject {
+  overflow: visible;
+}
+
 .svg-container {
   width: 50%;
   height: 50%;
@@ -79,10 +83,35 @@ body {
   stroke-width: 4;
 }
 
-.f1-track { stroke: #ff1e04; }
-.f2-track { stroke: #043961; }
-.f3-track { stroke: #e90300; }
-.fe-track { stroke: #14b7ed; }
-.motogp-track { stroke: #ffffff; }
-.wec-track { stroke: #01b9ff; }
-.track-default { stroke: #00ffc8; }
+.track-container {
+  height: 100%;
+  margin: 2rem;
+}
+
+.track-info {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.track-info h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.track-details {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  opacity: 0.9;
+  font-size: 1.1rem;
+  color: var(--tertiary-color);
+}
+
+.f1-track { stroke: var(--f1-accent); }
+.f2-track { stroke: var(--f2-accent); }
+.f3-track { stroke: var(--f3-accent); }
+.fe-track { stroke: var(--fe-accent); }
+.motogp-track { stroke: var(--motogp-accent); }
+.wec-track { stroke: var(--wec-accent); }
+.track-default { stroke: var(--default-accent); }
