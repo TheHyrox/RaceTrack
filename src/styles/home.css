@@ -39,7 +39,7 @@
   justify-content: center;
 }
 
-.card p {
+.card a {
   color: var(--text-color);
   position: absolute;
   bottom: 20px;
@@ -49,9 +49,10 @@
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
-.card p:hover {
+.card a:hover {
   background-color: rgba(0, 123, 255, 0.1);
   color: #007bff;
   transform: translateY(-2px);
