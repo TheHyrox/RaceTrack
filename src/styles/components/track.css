@@ -79,6 +79,10 @@ body {
   stroke-width: 4;
 }
 
-.f1-track { stroke: #e10600; }
-.motogp-track { stroke: #ff9900; }
-.wec-track { stroke: #00ffc8; }
+.f1-track { stroke: #ff1e04; }
+.f2-track { stroke: #043961; }
+.f3-track { stroke: #e90300; }
+.fe-track { stroke: #14b7ed; }
+.motogp-track { stroke: #ffffff; }
+.wec-track { stroke: #01b9ff; }
+.track-default { stroke: #00ffc8; }
