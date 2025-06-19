@@ -20,7 +20,12 @@ export class Router {
                 htmlFile: '/pages/selection.html',
                 component: () => import('./components/Selection.js'),
                 css: ['/styles/selection.css', '/styles/nav.css']
-            }
+            },
+            '/infos': {
+                title: 'Infos - Racing Track Visualizer',
+                htmlFile: '/pages/infos.html',
+                css: ['/styles/nav.css']
+            },
         };
         
         this.currentComponent = null;

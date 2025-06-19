@@ -1,5 +1,3 @@
-import React from 'react';
-
 const TrackSelector = ({ tracks, onTrackSelect }) => {
   const handleChange = (event) => {
     onTrackSelect(event.target.value);
