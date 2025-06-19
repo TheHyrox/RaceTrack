@@ -3,55 +3,43 @@ import { trackData } from '../data/tracks-data.js';
 
 export class RacingTrackVisualizer {
   constructor() {
+    this.tracks = trackData;
+    this.currentTrack = null;
     this.currentAnimation = null;
     this.currentAccentAnimation = null;
-    this.isPlaying = true;
-    this.currentSpeed = 1;
-    this.currentTrack = null;
-    this.tracks = trackData;
-    this.categoryHierarchy = this.buildCategoryHierarchy();
-    
-    setTimeout(() => {
-      this.init();
-    }, 100);
-  }
+    this.isAnimating = false;
 
-  buildCategoryHierarchy() {
-    return {
-      formula: ['f1', 'f2', 'f3', 'fe'],
-      motogp: ['motogp'],
-      wec: ['wec']
-    };
+    this.handleToggleAnimation = this.toggleAnimation.bind(this);
+    this.handleResetAnimation = this.resetAnimation.bind(this);
+
+    this.init();
   }
 
   init() {
-    this.setupEventListeners();
-    this.updateCategoryButtons();
-    this.updateTrackOptions('f1');
-    this.updateRotationSpeed(1);
+    this.initCustomEventListeners();
     this.handleURLParameters();
   }
-  
-  getAvailableCategories() {
-    return Object.keys(this.tracks).filter(category => 
-      Object.keys(this.tracks[category]).length > 0
-    );
+
+  destroy() {
+    this.stopAnimation();
+    this.removeCustomEventListeners();
   }
 
-  getTracksForCategory(category) {
-    return this.tracks[category] || {};
+  initCustomEventListeners() {
+    document.addEventListener('track:toggleAnimation', this.handleToggleAnimation);
+    document.addEventListener('track:resetAnimation', this.handleResetAnimation);
   }
 
-  getTrackData(category, trackId) {
-    const categoryData = this.getTracksForCategory(category);
-    return categoryData[trackId] || null;
+  removeCustomEventListeners() {
+    document.removeEventListener('track:toggleAnimation', this.handleToggleAnimation);
+    document.removeEventListener('track:resetAnimation', this.handleResetAnimation);
   }
 
   findTrackById(trackId) {
     for (const category in this.tracks) {
-        if (Object.prototype.hasOwnProperty.call(this.tracks[category], trackId)) {
-            return { category, trackData: this.tracks[category][trackId] };
-        }
+      if (Object.prototype.hasOwnProperty.call(this.tracks[category], trackId)) {
+        return { category, trackData: this.tracks[category][trackId] };
+      }
     }
     return null;
   }
@@ -63,127 +51,24 @@ export class RacingTrackVisualizer {
     if (trackId) {
       const trackInfo = this.findTrackById(trackId);
       if (trackInfo) {
-        const { category } = trackInfo;
-        const categoryBtn = document.querySelector(`[data-category="${category}"]`);
-        if (categoryBtn) {
-          document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-          categoryBtn.classList.add('active');
-          this.updateTrackOptions(category);
-          
-          setTimeout(() => {
-            const trackSelect = document.getElementById('track-select');
-            if (trackSelect) {
-                trackSelect.value = `${category}-${trackId}`;
-            }
-            this.loadTrack(category, trackId);
-          }, 100);
-        }
+        this.loadTrack(trackInfo.category, trackId, trackInfo.trackData);
       } else {
         const trackNameElement = document.getElementById('track-name');
         if (trackNameElement) {
-            trackNameElement.textContent = `Track with ID '${trackId}' not found.`;
+          trackNameElement.textContent = `Track with ID '${trackId}' not found.`;
         }
+      }
+    } else {
+      const trackNameElement = document.getElementById('track-name');
+      if (trackNameElement) {
+        trackNameElement.textContent = 'No track specified. Please select one from a category page.';
       }
     }
   }
 
-  updateCategoryButtons() {
-    const availableCategories = this.getAvailableCategories();
-    
-    Object.entries(this.categoryHierarchy).forEach(([mainCategory, subcategories]) => {
-      const categoryGroup = document.querySelector(`[data-main-category="${mainCategory}"]`);
-      const hasAvailableSubcategories = subcategories.some(sub => availableCategories.includes(sub));
-      
-      if (categoryGroup) {
-        if (hasAvailableSubcategories) {
-          categoryGroup.style.display = 'block';
-          categoryGroup.classList.remove('disabled');
-        } else {
-          categoryGroup.style.display = 'none';
-          categoryGroup.classList.add('disabled');
-        }
-      }
-    });
-
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    categoryButtons.forEach(btn => {
-      const category = btn.dataset.category;
-      if (!availableCategories.includes(category)) {
-        btn.disabled = true;
-        btn.classList.add('disabled');
-      } else {
-        btn.disabled = false;
-        btn.classList.remove('disabled');
-      }
-    });
-  }
-
-  setupEventListeners() {
-    document.querySelectorAll('.category-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        if (e.target.disabled) return;
-        
-        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        this.updateTrackOptions(e.target.dataset.category);
-      });
-    });
-
-    const trackSelect = document.getElementById('track-select');
-    if (trackSelect) {
-      trackSelect.addEventListener('change', (e) => {
-        if (e.target.value) {
-          const [category, trackId] = e.target.value.split('-');
-          this.loadTrack(category, trackId);
-        }
-      });
-    }
-
-    const playPauseBtn = document.getElementById('play-pause');
-    if (playPauseBtn) {
-      playPauseBtn.addEventListener('click', () => this.toggleAnimation());
-    }
-
-    const resetBtn = document.getElementById('reset');
-    if (resetBtn) {
-      resetBtn.addEventListener('click', () => this.resetAnimation());
-    }
-
-    const speedSlider = document.getElementById('speed-slider');
-    if (speedSlider) {
-      speedSlider.addEventListener('input', (e) => this.updateSpeed(parseFloat(e.target.value)));
-    }
-  }
-
-  updateTrackOptions(category) {
-    const select = document.getElementById('track-select');
-    if (!select) return;
-    
-    const tracks = this.getTracksForCategory(category);
-    
-    select.innerHTML = '<option value="">Select a track...</option>';
-    
-    if (Object.keys(tracks).length === 0) {
-      const option = document.createElement('option');
-      option.value = '';
-      option.textContent = `No tracks available for ${this.getCategoryDisplayName(category)}`;
-      option.disabled = true;
-      select.appendChild(option);
-      return;
-    }
-
-    Object.entries(tracks).forEach(([trackId, track]) => {
-      const option = document.createElement('option');
-      option.value = `${category}-${trackId}`;
-      option.textContent = track.name;
-      select.appendChild(option);
-    });
-  }
-
-  loadTrack(category, trackId) {
+  loadTrack(category, trackId, track) {
     this.stopAnimation();
     
-    const track = this.getTrackData(category, trackId);
     if (!track) {
       console.error(`Track not found: ${category}-${trackId}`);
       return;
@@ -192,7 +77,8 @@ export class RacingTrackVisualizer {
     this.currentTrack = { category, trackId, ...track };
     this.updateTrackInfo(track);
     this.renderTrack(track, category);
-    this.startAnimation();
+    
+    setTimeout(() => this.startAnimation(), 100);
   }
 
   updateTrackInfo(track) {
@@ -201,8 +87,8 @@ export class RacingTrackVisualizer {
     const trackLocationElement = document.getElementById('track-location');
     
     if (trackNameElement) trackNameElement.textContent = track.name;
-    if (trackLengthElement && track.length) trackLengthElement.textContent = track.length;
-    if (trackLocationElement && track.location) trackLocationElement.textContent = track.location;
+    if (trackLengthElement) trackLengthElement.textContent = track.length || '';
+    if (trackLocationElement) trackLocationElement.textContent = track.location || '';
   }
 
   renderTrack(track, category) {
@@ -236,102 +122,69 @@ export class RacingTrackVisualizer {
     };
   }
 
-  getCategoryDisplayName(category) {
-    const displayNames = {
-      f1: 'Formula 1',
-      f2: 'Formula 2',
-      f3: 'Formula 3',
-      fe: 'Formula E',
-      motogp: 'MotoGP',
-      wec: 'WEC'
-    };
-    return displayNames[category] || category;
-  }
-
   startAnimation() {
-    if (!this.currentTrack) return;
+    if (!this.currentTrack || this.isAnimating) return;
+
+    this.isAnimating = true;
+    document.dispatchEvent(new CustomEvent('animation:stateChanged', { detail: { isPlaying: this.isAnimating } }));
+    this.setRotatorPlayState('running');
 
     const pathSelector = '#track-accent-path';
     const carSelector = '#car-foreign';
-    const duration = (this.currentTrack.duration || 4000) / this.currentSpeed;
+    const duration = this.currentTrack.duration || 10000;
 
-    if (this.currentAccentAnimation) this.currentAccentAnimation.pause();
-    this.currentAccentAnimation = animate(svg.createDrawable(pathSelector), {
-      draw: '0 1',
-      ease: 'linear',
-      duration: duration,
-      loop: true
-    });
+    if (this.currentAnimation && this.currentAccentAnimation) {
+        this.currentAnimation.play();
+        this.currentAccentAnimation.play();
+    } else {
+        const svgElement = document.getElementById('track-svg');
+        if (!svgElement) return;
 
-    if (this.currentAnimation) this.currentAnimation.pause();
-    this.currentAnimation = animate(carSelector, {
-      ease: 'linear',
-      duration: duration,
-      loop: true,
-      ...svg.createMotionPath(pathSelector)
-    });
+        this.currentAccentAnimation = animate(svg.createDrawable(pathSelector), {
+            draw: '0 1',
+            ease: 'linear',
+            duration: duration,
+            loop: true
+        });
 
-    this.isPlaying = true;
-    const playPauseBtn = document.getElementById('play-pause');
-    if (playPauseBtn) playPauseBtn.textContent = 'Pause';
-    this.setRotatorPlayState('running');
+        this.currentAnimation = animate(carSelector, {
+            ease: 'linear',
+            duration: duration,
+            loop: true,
+            ...svg.createMotionPath(pathSelector)
+        });
+    }
   }
 
   stopAnimation() {
-    if (this.currentAnimation) {
-      this.currentAnimation.pause();
-      this.currentAnimation = null;
-    }
-    if (this.currentAccentAnimation) {
-      this.currentAccentAnimation.pause();
-      this.currentAccentAnimation = null;
-    }
+    if (!this.isAnimating && !this.currentAnimation) return;
+
+    this.isAnimating = false;
+    document.dispatchEvent(new CustomEvent('animation:stateChanged', { detail: { isPlaying: this.isAnimating } }));
+    this.setRotatorPlayState('paused');
+
+    if (this.currentAnimation) this.currentAnimation.pause();
+    if (this.currentAccentAnimation) this.currentAccentAnimation.pause();
   }
 
   toggleAnimation() {
-    if (!this.currentAnimation) return;
-    if (this.isPlaying) {
-      this.currentAnimation.pause();
-      this.currentAccentAnimation.pause();
-      this.setRotatorPlayState('paused');
-      const playPauseBtn = document.getElementById('play-pause');
-      if (playPauseBtn) playPauseBtn.textContent = 'Play';
+    if (!this.currentTrack) return;
+    if (this.isAnimating) {
+      this.stopAnimation();
     } else {
-      this.currentAnimation.play();
-      this.currentAccentAnimation.play();
-      this.setRotatorPlayState('running');
-      const playPauseBtn = document.getElementById('play-pause');
-      if (playPauseBtn) playPauseBtn.textContent = 'Pause';
+      this.startAnimation();
     }
-    this.isPlaying = !this.isPlaying;
   }
 
   resetAnimation() {
-    if (this.currentAnimation) {
-      this.currentAnimation.restart();
-      this.currentAccentAnimation.restart();
-      if (!this.isPlaying) {
-        this.currentAnimation.pause();
-        this.currentAccentAnimation.pause();
-      }
-    }
-  }
+    if (!this.currentTrack) return;
 
-  updateSpeed(speed) {
-    this.currentSpeed = speed;
-    const speedValueElement = document.getElementById('speed-value');
-    if (speedValueElement) speedValueElement.textContent = `${speed}x`;
-    if (this.currentTrack) {
-      this.loadTrack(this.currentTrack.category, this.currentTrack.trackId);
-    }
-    this.updateRotationSpeed(speed);
-  }
+    this.stopAnimation();
+    
+    if (this.currentAnimation) this.currentAnimation.seek(0);
+    if (this.currentAccentAnimation) this.currentAccentAnimation.seek(0);
 
-  updateRotationSpeed(multiplier) {
-    const rotator = document.querySelector('.svg-rotator');
-    if (rotator) {
-      rotator.style.animationDuration = `${16 / multiplier}s`;
-    }
+    this.startAnimation();
   }
 
   setRotatorPlayState(state) {
@@ -339,13 +192,6 @@ export class RacingTrackVisualizer {
     if (rotator) {
       rotator.style.animationPlayState = state;
     }
-  }
-
-  destroy() {
-    this.stopAnimation();
-    document.querySelectorAll('.category-btn').forEach(btn => {
-      btn.replaceWith(btn.cloneNode(true));
-    });
   }
 }
 
