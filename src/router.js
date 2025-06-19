@@ -1,3 +1,5 @@
+import { Nav } from './components/Nav.js';
+
 export class Router {
     constructor() {
         this.routes = {
@@ -5,19 +7,19 @@ export class Router {
                 title: 'Home - Racing Track Visualizer',
                 htmlFile: '/pages/home.html',
                 component: () => import('./components/Home.js'),
-                css: ['/styles/home.css']
+                css: ['/styles/home.css', '/styles/nav.css']
             },
             '/tracks': {
                 title: 'Tracks - Racing Track Visualizer',
                 htmlFile: '/pages/tracks.html',
                 component: () => import('./components/RacingTrackVisualizer.js'),
-                css: ['/styles/tracks.css', '/styles/components/controls.css', 'styles/components/tracks.css']
+                css: ['/styles/tracks.css', '/styles/components/controls.css', '/styles/nav.css']
             },
             '/selection': {
                 title: 'Selection - Racing Track Visualizer',
                 htmlFile: '/pages/selection.html',
                 component: () => import('./components/Selection.js'),
-                css: ['/styles/selection.css']
+                css: ['/styles/selection.css', '/styles/nav.css']
             }
         };
         
@@ -57,6 +59,7 @@ export class Router {
             }
             
             await this.loadHTML(route.htmlFile);
+            new Nav();
             
             if (route.component) {
                 const module = await route.component();

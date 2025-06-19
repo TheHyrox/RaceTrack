@@ -7,52 +7,6 @@
 </head>
 <body>
     <div id="app">
-        <header>
-            <h1>Racing Track Visualizer</h1>
-            <p>Watch cars navigate famous racing circuits from F1, MotoGP & WEC</p>
-        </header>
-
-        <nav class="controls">
-            <div class="category-selector">
-                <div class="category-group" data-main-category="formula">
-                    <h3 class="main-category-title">Formula</h3>
-                    <div class="subcategory-buttons">
-                        <button class="category-btn active" data-category="f1">Formula 1</button>
-                        <button class="category-btn" data-category="f2">Formula 2</button>
-                        <button class="category-btn" data-category="f3">Formula 3</button>
-                        <button class="category-btn" data-category="fe">Formula E</button>
-                    </div>
-                </div>
-                
-                <div class="category-group" data-main-category="motogp">
-                    <h3 class="main-category-title">MotoGP</h3>
-                    <div class="subcategory-buttons">
-                        <button class="category-btn" data-category="motogp">MotoGP</button>
-                    </div>
-                </div>
-                
-                <div class="category-group" data-main-category="wec">
-                    <h3 class="main-category-title">WEC</h3>
-                    <div class="subcategory-buttons">
-                        <button class="category-btn" data-category="wec">WEC</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="track-selector">
-                <select id="track-select">
-                    <option value="">Select a track...</option>
-                </select>
-            </div>
-
-            <div class="animation-controls">
-                <button id="play-pause">Pause</button>
-                <button id="reset">Reset</button>
-                <input type="range" id="speed-slider" min="0.5" max="3" step="0.1" value="1">
-                <label for="speed-slider">Speed: <span id="speed-value">1x</span></label>
-            </div>
-        </nav>
-
         <main class="track-container">
             <div class="track-info">
                 <h2 id="track-name">Select a track to begin</h2>
@@ -73,7 +27,6 @@
                 </div>
             </div>
         </main>
-
     </div>
     <script type="module" src="../main.js"></script>
 </body>
