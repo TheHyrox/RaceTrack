@@ -1,0 +1,96 @@
+<header>
+    <h1>Racing Track Visualizer</h1>
+    <p>Watch cars navigate famous racing circuits from F1, MotoGP & WEC</p>
+</header>
+
+<style>
+    h2 {
+        margin: 20px;
+        color: var(--tertiary-color);
+        text-decoration: underline;
+    }
+
+    h4 {
+        margin: 10px 10px 10px 0px;
+        color: var(--tertiary-color);
+    }
+</style>
+
+<div class="container info-container">
+    <div class="row">
+        <div class="col">
+            <h2>
+                General Informations
+            </h2>
+            <h4>
+                What is this ?  
+            </h4>
+            <p>
+                This is a vite web app which use <a href="https://animejs.com/" target="_blank">anime.js</a> to animate car movements on your favorite race tracks all arround the world.
+            </p>
+            <h4>
+                How to use it ?
+            </h4>
+            <p>
+                On the <a href="/" data-route="/">home page</a> select a racing category (Like F1 or WEC), select a track on the card view then enjoy ! (You can pause the or reset car position)
+            </p>
+            <h4>
+                Why this ?
+            </h4>
+            <p>
+                After watching LeMans I remembered the Anime.js site, on the home page there was a very cool effect (with the track in 3d) and I thought “why not reproduce it”? Then finally I found that the RacingCircuit.info site was a bit boring.... If you're going to make a 3D circuit, why not make them all?
+            </p>
+        </div>
+        <div class="col">
+            <h2 style="margin: 20px;">
+                Sources & Thanks
+            </h2>
+            <h4>
+                Sources  
+            </h4>
+            <p>
+                For the Category Logos on Home page, the sources are in the alt of the picture
+                <br>
+                For the tracks (svg path and infos) mostly found on <a href="https://freesvg.org/">freesvg.org</a> and the goat <a href="https://en.wikipedia.org/">Wikipedia</a>
+                <br>
+                For the Flags all of it are from <a href="https://commons.wikimedia.org/wiki/Main_Page">Wikimedia Commons</a> and some are edited by me to be more visible
+            </p>
+            <h4>
+                Thanks
+            </h4>
+            <p>
+                Special thanks to @Julian Garnier for <a href="https://github.com/sponsors/juliangarnier?ref=animejs" target="_blank">anime.js</a> which inpired me to create this project.
+                <br>
+                Also thanks to some friends who helped me to test the app and give me feedbacks mostly on design.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>
+                QA / FAQ
+            </h2>
+            <h4>
+                1 - It will be updated with more tracks and features ?
+            </h4>
+            <p>
+                All my plans are on the <a href="https://github.com/users/TheHyrox/projects/1/views/1" target="_blank">Project Backlog</a> on Github, you can see what I plan to do, what I do now and what is done.
+            </p>
+            <h4>
+                2 - How you do the 3D ?
+            </h4>
+            <p>
+                You fool ! It's not 3D, it's just a 2D SVG path with a perspective effect applied to it. You can see the code for it on the "tracks" named files and the RacingTrackVisualizer.js file.
+            </p>
+            <h4>
+                3 - Can I contribute ? 
+            </h4>
+            <p>
+                Of course ! You can contribute by adding new tracks and categories (please it could help me so much), fixing bugs (or only tell me your issues if you're not a dev) and even improving the design if you want. Simply go to the <a href="https://github.com/TheHyrox/RaceTrack/issues/new" target="_blank">issues page</a> on Github and create a new issue or a pull request. 
+            </p>
+        </div>
+        <div class="col">
+            <!-- Other Col for fun or whatever :D If you see this message ur sweat <3 -->
+        </div>
+    </div>
+</div>
