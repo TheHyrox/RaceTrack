@@ -59,7 +59,7 @@
 }
 
 .pill-menu:hover .track-controls-left {
-  max-width: 120px;
+  max-width: 180px;
   opacity: 1;
   padding-right: 10px;
 }
