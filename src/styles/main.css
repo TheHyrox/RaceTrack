@@ -32,6 +32,30 @@ header p {
   color: var(--text-color);
 }
 
+nav {
+    padding: 1rem 2rem;
+}
+
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: var(--primary-color);
+}
+
 @media (max-width: 768px) {  
   header h1 {
     font-size: 2rem;

@@ -15,8 +15,9 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: 10000,
     open: true,
+    allowedHosts: ['localhost', 'racetrack-sih9.onrender.com']
   },
   resolve: {
     alias: {
