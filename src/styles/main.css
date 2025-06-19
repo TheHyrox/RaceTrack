@@ -36,6 +36,21 @@ nav {
     padding: 1rem 2rem;
 }
 
+a {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--tertiary-color);
+  padding: 3px;
+  border-radius: 4px;
+}
+
+a:hover {
+  background-color: var(--bg-secondary);
+  color: var(--tertiary-color);
+  transform: translateY(-2px);
+}
+
 .nav-menu {
     list-style: none;
     padding: 0;
