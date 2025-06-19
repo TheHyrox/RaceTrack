@@ -1,0 +1,19 @@
+{
+	"Add a Track": {
+		"scope": "javascript",
+		"prefix": "adtr",
+		"body": [
+			"'${1:trackKey}': {",
+			"    name: '${2:Track Name}',",
+			"    location: '${3:City}, ${4:Country}',",
+			"    length: '${5:0} km',",
+			"    countryCode: '${6:XX}',",
+			"    turns: ${7:0},",
+			"    duration: ${8:0},",
+			"    viewBox: '${9:0 0 100 100}',",
+			"    path: '${10:}'",
+			"},"
+		],
+		"description": "Add a new track to the data"
+	}
+}

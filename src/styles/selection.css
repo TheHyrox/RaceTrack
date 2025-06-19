@@ -1,6 +1,6 @@
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 20px;
 }
@@ -27,7 +27,7 @@
 .card h3 {
   color: var(--text-color);
   text-align: left;
-  font-size: 2em;
+  font-size: 1.8em;
   margin: 0 0 20px 0;
 }
 
@@ -70,9 +70,22 @@
   object-fit: cover;
 }
 
+@media (max-width: 1200px) {
+  .cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .card h3 {
+    font-size: 1.8em;
+  }
+  
+}
+
 @media (max-width: 1024px) {
   .cards-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .card h3 {
+    font-size: 1.8em;
   }
 }
 
@@ -80,10 +93,16 @@
   .cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .card h3 {
+    font-size: 1.6em;
+  }
 }
 
 @media (max-width: 480px) {
   .cards-grid {
     grid-template-columns: 1fr;
+  }
+  .card h3 {
+    font-size: 1.4em;
   }
 }
