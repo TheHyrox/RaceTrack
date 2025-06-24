@@ -10,6 +10,7 @@ export class WorldMap {
 
         this.animate = this.animate.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.onWindowResize = this.onWindowResize.bind(this);
         this.destroy = this.destroy.bind(this);
 
@@ -45,10 +46,11 @@ export class WorldMap {
             this.countries = topojson.feature(worldData, worldData.objects.countries);
             this.createGlobe();
             
-            this.setEnabledCountries(['France', 'Australia', 'Belgium', 'Bahrain', 'Canada', 'Spain', 'United States', 'United Kingdom', 'Italy', 'Japan', 'Monaco', 'Saudi Arabia']);
+            this.setEnabledCountries(['France', 'Australia', 'Belgium', 'Bahrain', 'Canada', 'Spain', 'United States of America', 'United Kingdom', 'Italy', 'Japan', 'Monaco', 'Saudi Arabia']);
 
             this.animate();
-            window.addEventListener('mousemove', this.onMouseMove);
+            this.renderer.domElement.addEventListener('mousemove', this.onMouseMove);
+            this.renderer.domElement.addEventListener('click', this.onClick);
             window.addEventListener('resize', this.onWindowResize);
         } catch (error) {
             console.error("Failed to load world data:", error);
@@ -125,25 +127,31 @@ export class WorldMap {
         this.raycaster.setFromCamera(this.mouse, this.camera);
         const intersects = this.raycaster.intersectObject(this.globe);
 
-        let currentCountry = null;
+        let newHoveredCountry = null;
 
         if (intersects.length > 0) {
             const { uv } = intersects[0];
-            const lonLat = this.projection.invert([uv.x * 4096, uv.y * 2048]);
+            const lonLat = this.projection.invert([uv.x * 4096, (1 - uv.y) * 2048]);
             
             if (lonLat) {
-                const country = this.countries.features.find(f => d3.geoContains(f, lonLat));
-                const isEnabled = !this.enabledCountries || (country && this.enabledCountries.has(country.properties.name));
-
-                if (country && isEnabled) {
-                    currentCountry = country;
+                const foundCountry = this.countries.features.find(f => d3.geoContains(f, lonLat));
+                
+                if (foundCountry && this.enabledCountries?.has(foundCountry.properties.name)) {
+                    newHoveredCountry = foundCountry;
                 }
             }
         }
 
-        if (this.hoveredCountry?.id !== currentCountry?.id) {
-            this.hoveredCountry = currentCountry;
+        if (this.hoveredCountry?.id !== newHoveredCountry?.id) {
+            this.hoveredCountry = newHoveredCountry;
             this.drawMap(this.hoveredCountry);
+            this.container.style.cursor = this.hoveredCountry ? 'pointer' : 'grab';
+        }
+    }
+
+    onClick() {
+        if (this.hoveredCountry) {
+            alert(`You selected ${this.hoveredCountry.properties.name}`);
         }
     }
 
@@ -162,7 +170,8 @@ export class WorldMap {
 
     destroy() {
         cancelAnimationFrame(this.animationFrameId);
-        window.removeEventListener('mousemove', this.onMouseMove);
+        this.renderer.domElement.removeEventListener('mousemove', this.onMouseMove);
+        this.renderer.domElement.removeEventListener('click', this.onClick);
         window.removeEventListener('resize', this.onWindowResize);
         this.renderer.dispose();
         this.globeMaterial?.map?.dispose();
