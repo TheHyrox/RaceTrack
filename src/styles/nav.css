@@ -45,7 +45,6 @@
 .track-controls-left {
   max-width: 0;
   opacity: 0;
-  overflow: hidden;
   transition: max-width 0.4s ease-in-out, opacity 0.3s ease-in-out 0.1s, padding-right 0.4s ease-in-out;
   padding-right: 0;
 }
@@ -53,7 +52,6 @@
 .nav-links-right {
   max-width: 0;
   opacity: 0;
-  overflow: hidden;
   transition: max-width 0.4s ease-in-out, opacity 0.3s ease-in-out 0.1s, padding-left 0.4s ease-in-out;
   padding-left: 0;
 }
