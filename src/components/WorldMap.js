@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import * as d3 from 'd3';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as topojson from 'topojson-client';
+import { trackData } from '../data/tracks-data.js';
 
 export class WorldMap {
     constructor() {
@@ -151,7 +152,7 @@ export class WorldMap {
 
     onClick() {
         if (this.hoveredCountry) {
-            alert(`You selected ${this.hoveredCountry.properties.name}`);
+            this.trackList(this.hoveredCountry.properties.name);
         }
     }
 
@@ -178,6 +179,53 @@ export class WorldMap {
         this.globeMaterial?.dispose();
         this.globe?.geometry.dispose();
         if (this.container) this.container.innerHTML = '';
+    }
+
+    trackList(countryName) {
+        const trackListContainer = document.querySelector('.tracks-list');
+        if (!trackListContainer) return;
+        const countryNameToCode = {
+            'France': 'FR',
+            'Australia': 'AU',
+            'Belgium': 'BE',
+            'Bahrain': 'BH',
+            'Canada': 'CA',
+            'Spain': 'ES',
+            'United States of America': 'US',
+            'United Kingdom': 'GB',
+            'Italy': 'IT',
+            'Japan': 'JP',
+            'Monaco': 'MC',
+            'Saudi Arabia': 'SA'
+        };
+
+        const tracks = [];
+        for (const category in trackData) {
+            if (Object.prototype.hasOwnProperty.call(trackData, category)) {
+                const categoryTracks = trackData[category];
+                for (const trackId in categoryTracks) {
+                    if (Object.prototype.hasOwnProperty.call(categoryTracks, trackId)) {
+                        const track = categoryTracks[trackId];
+                        if (track.countryCode === countryNameToCode[countryName]) {
+                            tracks.push({ id: trackId, name: track.name });
+                        }
+                    }
+                }
+            }
+        }
+        if (tracks.length > 0) {
+            trackListContainer.innerHTML = `<h2>Tracks in ${countryName}</h2>`;
+            const trackList = document.createElement('ul');
+            tracks.forEach(track => {
+                const listItem = document.createElement('li');
+                listItem.textContent = track.name;
+                // listItem.addEventListener('click', () => {
+                //     window.location.href = `?track=${track.id}`;
+                // });
+                trackList.appendChild(listItem);
+            });
+            trackListContainer.appendChild(trackList);
+        }
     }
 }
 
