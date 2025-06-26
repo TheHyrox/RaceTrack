@@ -1,12 +1,16 @@
 body {
-  background-color: #1a1a1a;
-  background-image: 
-    radial-gradient(circle at 1px 1px, rgba(0, 255, 213, 0.2) 1px, transparent 0);
+  background: #1a1a1a radial-gradient(circle at 1px 1px, rgba(230, 192, 123, 0.2) 1px, transparent 0);
   background-size: 25px 25px;
 }
 
 foreignObject {
   overflow: visible;
+}
+
+.svg-container, .svg-scene {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .svg-container {
@@ -15,18 +19,12 @@ foreignObject {
   background: transparent;
   position: relative;
   margin: 10% auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .svg-scene {
   width: 100%;
   height: 100%;
   perspective: 1500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: visible;
 }
 
@@ -105,7 +103,7 @@ foreignObject {
   gap: 2rem;
   opacity: 0.9;
   font-size: 1.1rem;
-  color: var(--tertiary-color);
+  color: var(--primary-color);
 }
 
 .f1-track { stroke: var(--f1-accent); }

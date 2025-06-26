@@ -26,10 +26,10 @@ export class Selection {
                 const cardHTML = `
                     <div class="card">
                         <img src="/Flags/${track.countryCode}.svg" alt="Flag" class="flag">
-                        <svg class="track" viewBox="${track.viewBox}" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="track" viewBox="${track.viewBox}" xmlns="http://www.w3.org/2000/svg" onclick="window.location.href='/tracks?category=${category}&track=${trackId}'">
                             <path d="${track.path}" fill="none" stroke="var(--text-color)" stroke-width="5"/>
                         </svg>
-                        <h3>${track.name}</h3>
+                        <h3 onclick="window.location.href='/tracks?category=${category}&track=${trackId}'" >${track.name}</h3>
                         <p>${track.location}</p>
                         <p>Length: ${track.length}</p>
                         <p>Turns: ${track.turns}</p>
