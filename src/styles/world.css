@@ -1,13 +1,24 @@
 #world-container {
-    width: 80vw;
     height: 80vh;
     cursor: grab;
-    margin: 0 auto;
     display: flex;
-    align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 #world-container:active {
     cursor: grabbing;
+}
+
+.tracks-list {
+    border: 5px solid #FFF;
+    border-radius: 10px;
+    padding: 0.5%;
+    background-color: rgba(0, 0, 0, 0);
+    width: 20vw;
+    height: 50vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 2vh;
 }
