@@ -133,7 +133,7 @@
       const carSelector = '#car-foreign';
       const duration = this.currentTrack.duration || 10000;
 
-      document.querySelector('path.track-accent').style.strokeDashoffset = this.currentTrack.offset || '0';
+      document.querySelector('path.track-accent').style.strokeDashoffset = this.currentTrack.startOffset   || '0';
 
       if (this.currentAnimation && this.currentAccentAnimation) {
           this.currentAnimation.play();
