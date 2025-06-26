@@ -183,6 +183,7 @@ export class WorldMap {
 
     trackList(countryName) {
         const trackListContainer = document.querySelector('.tracks-list');
+        const trackInfosContainer = document.querySelector('.track-infos');
         if (!trackListContainer) return;
         const countryNameToCode = {
             'France': 'FR',
@@ -207,21 +208,30 @@ export class WorldMap {
                     if (Object.prototype.hasOwnProperty.call(categoryTracks, trackId)) {
                         const track = categoryTracks[trackId];
                         if (track.countryCode === countryNameToCode[countryName]) {
-                            tracks.push({ id: trackId, name: track.name });
+                            tracks.push({ id: trackId, name: track.name, length: track.length, location: track.location });
                         }
                     }
                 }
             }
         }
         if (tracks.length > 0) {
+            trackListContainer.style.visibility = 'visible';
+            trackInfosContainer.style.visibility = 'hidden';
             trackListContainer.innerHTML = `<h2>Tracks in ${countryName}</h2>`;
             const trackList = document.createElement('ul');
             tracks.forEach(track => {
                 const listItem = document.createElement('li');
                 listItem.textContent = track.name;
-                // listItem.addEventListener('click', () => {
-                //     window.location.href = `?track=${track.id}`;
-                // });
+                listItem.addEventListener('click', () => {
+                    trackInfosContainer.style.visibility = 'visible';
+                    trackInfosContainer.innerHTML = `
+                        <h3>${track.name}</h3>
+                        <p>Track ID: ${track.id}</p>
+                        <p>Country: ${countryName}</p>
+                        <p>Length: ${track.length} km</p>
+                        <p>Location: ${track.location}</p>
+                    `;
+                });
                 trackList.appendChild(listItem);
             });
             trackListContainer.appendChild(trackList);
