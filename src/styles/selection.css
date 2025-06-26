@@ -49,12 +49,12 @@
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  color: var(--tertiary-color);
+  color: var(--primary-color);
 }
 
-.card a:hover {
+.link:hover {
   background-color: var(--bg-secondary);
-  color: var(--tertiary-color);
+  color: var(--primary-color);
   transform: translateY(-2px);
 }
 
@@ -71,21 +71,14 @@
 }
 
 @media (max-width: 1200px) {
-  .cards-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
   .card h3 {
     font-size: 1.8em;
   }
-  
 }
 
 @media (max-width: 1024px) {
   .cards-grid {
     grid-template-columns: repeat(3, 1fr);
-  }
-  .card h3 {
-    font-size: 1.8em;
   }
 }
 

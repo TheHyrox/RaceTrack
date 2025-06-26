@@ -26,6 +26,12 @@ export class Router {
                 htmlFile: '/pages/infos.html',
                 css: ['/styles/nav.css']
             },
+            '/world': {
+                title: 'World Map - Racing Track Visualizer',
+                htmlFile: '/pages/world.html',
+                component: () => import('./components/WorldMap.js'),
+                css: ['/styles/world.css', '/styles/nav.css']
+            },
         };
         
         this.currentComponent = null;
