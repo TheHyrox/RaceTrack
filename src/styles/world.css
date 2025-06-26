@@ -1,0 +1,60 @@
+#world-container {
+    height: 80vh;
+    cursor: grab;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+#world-container:active {
+    cursor: grabbing;
+}
+
+.tracks-list, .track-infos {
+    border: 3px solid #fff;
+    border-radius: 16px;
+    padding: 1.5%;
+    box-shadow: 0 8px 32px 0 rgba(230, 192, 123, 0);
+    width: 22vw;
+    height: 45vh;
+    position: absolute;
+    right: 0;
+    margin: 2vh;
+    visibility: hidden;
+    transition: box-shadow 0.3s, background 0.3s;
+}
+
+.tracks-list {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    top: 0;
+}
+
+.tracks-list:hover, .track-infos:hover {
+    box-shadow: 0 12px 40px 0 rgba(230, 192, 123, 0.5);
+}
+
+.track-infos {
+    background: rgba(0, 0, 0, 0.5) center/cover no-repeat;
+    background-blend-mode: darken;
+    bottom: 0;
+}
+
+.track-infos a:hover {
+    background-color: var(--bg-secondary);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.link {
+    position: absolute;
+    bottom: 20px;
+    right: 20px; 
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--primary-color);
+}
