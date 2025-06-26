@@ -5,6 +5,7 @@ export const wecdata = {
             location: 'Le Mans, Sarthe, France',
             length: '12.6 km',
             countryCode: 'FR',
+            pictureSource: 'FIA Wec Website',
             turns: 38,
             duration: 15000,
             viewBox: "0 0 680 315",

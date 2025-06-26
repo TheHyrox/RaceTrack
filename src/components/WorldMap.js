@@ -208,7 +208,7 @@ export class WorldMap {
                     if (Object.prototype.hasOwnProperty.call(categoryTracks, trackId)) {
                         const track = categoryTracks[trackId];
                         if (track.countryCode === countryNameToCode[countryName]) {
-                            tracks.push({ id: trackId, name: track.name, length: track.length, location: track.location });
+                            tracks.push({ id: trackId, category: category, name: track.name, length: track.length, location: track.location, altImg: track.pictureSource });
                         }
                     }
                 }
@@ -224,12 +224,14 @@ export class WorldMap {
                 listItem.textContent = track.name;
                 listItem.addEventListener('click', () => {
                     trackInfosContainer.style.visibility = 'visible';
+                    trackInfosContainer.style.backgroundImage = `url('/TrackIllustration/${track.category}/${track.id}.jpg')`;
                     trackInfosContainer.innerHTML = `
                         <h3>${track.name}</h3>
                         <p>Track ID: ${track.id}</p>
                         <p>Country: ${countryName}</p>
                         <p>Length: ${track.length} km</p>
                         <p>Location: ${track.location}</p>
+                        <a href="/tracks?category=${track.category}&track=${track.id}" data-route="/tracks?category=${track.category}&track=${track.id}" class="link">-> See track</a>
                     `;
                 });
                 trackList.appendChild(listItem);

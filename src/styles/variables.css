@@ -1,8 +1,5 @@
 :root {
-  --primary-color: #26f2d5;
-  --secondary-color: #26f2d5;
-  --accent-color: #22d4ba;
-  --tertiary-color: #e6c07b;
+  --primary-color: #e6c07b;
   
   --bg-main: #252423;
   --bg-secondary: #2f2e2d;
@@ -10,7 +7,7 @@
   --background-gradient: linear-gradient(135deg, #252423 0%, #2f2e2d 100%);
   --text-color: white;
   --glass-bg: rgba(47, 46, 45, 0.6);
-  --glass-border: rgba(38, 242, 213, 0.3);
+  --glass-border: rgba(230, 192, 123, 0.3);
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   --border-radius: 15px;
   --transition: all 0.3s ease;
