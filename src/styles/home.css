@@ -37,6 +37,7 @@
   flex-grow: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .card a {
@@ -46,15 +47,15 @@
   right: 20px;
   margin: 0;
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .card a:hover {
-  background-color: rgba(0, 123, 255, 0.1);
-  color: #007bff;
+  background-color: rgba(230, 192, 123, 0.1);
+  color: var(--primary-color);
   transform: translateY(-2px);
 }
 
