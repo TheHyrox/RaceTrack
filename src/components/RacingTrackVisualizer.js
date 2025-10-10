@@ -78,7 +78,7 @@ export class RacingTrackVisualizer {
     this.updateTrackInfo(track);
     this.renderTrack(track, category);
     
-    setTimeout(() => this.startAnimation(), 100);
+    setTimeout(() => this.startAnimation(track), 100);
   }
 
   updateTrackInfo(track) {
@@ -122,7 +122,7 @@ export class RacingTrackVisualizer {
     };
   }
 
-  startAnimation() {
+  startAnimation(track) {
     if (!this.currentTrack || this.isAnimating) return;
 
     this.isAnimating = true;
@@ -151,7 +151,7 @@ export class RacingTrackVisualizer {
             ease: 'linear',
             duration: duration,
             loop: true,
-            ...svg.createMotionPath(pathSelector)
+            ...svg.createMotionPath(pathSelector, track.offset || 0)
         });
     }
   }
